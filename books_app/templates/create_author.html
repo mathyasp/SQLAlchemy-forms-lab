@@ -5,5 +5,24 @@
 <p>Author creation form.</p>
 
 <!-- TODO: Add a <form> element here and use the form variable to show the labels & fields -->
+<form method="post">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Enter an author</legend>
+
+        {{ form.name.label }}
+        {{ form.name }}
+
+        {{ form.biography.label }}
+        {{ form.biography }}
+
+        {{ form.birth_date.label }}
+        {{ form.birth_date }}
+
+        {{ form.country.label }}
+        {{ form.country }}
+
+        {{ form.submit }} 
+    </fieldset>
 
 {% endblock %}

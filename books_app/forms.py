@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField
+from wtforms import StringField, DateField, SelectField, SubmitField, TextAreaField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, ValidationError
 from books_app.models import Audience, Book, Author, Genre
@@ -29,11 +29,20 @@ class AuthorForm(FlaskForm):
     # - the author's name
     # - the author's biography (hint: use a TextAreaField)
     # - a submit button
+    name = StringField('Author Name',
+        validators=[
+            DataRequired(),
+            Length(min=3, max=80, message="Your message needs to be betweeen 3 and 80 chars")
+        ])
+    biography = TextAreaField('Biography', validators=[DataRequired()])
+    birth_date = DateField('Birth Date', validators=[DataRequired()])
+    country = StringField('Country', validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
     # STRETCH CHALLENGE: Add more fields here as well as in `models.py` to
     # collect more information about the author, such as their birth date,
     # country, etc.
-    pass
+
 
 
 class GenreForm(FlaskForm):

@@ -50,6 +50,8 @@ class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     biography = db.Column(db.String(200))
+    birth_date = db.Column(db.Date)
+    country = db.Column(db.String(80))
     books = db.relationship('Book', back_populates='author')
 
     def __str__(self):
