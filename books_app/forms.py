@@ -75,3 +75,18 @@ class GenreForm(FlaskForm):
     def validate_name(form, field):
         if not re.match(r'^[A-Za-z\s]+$', field.data):
             raise ValidationError('Name can only contain letters and spaces')
+
+class UserForm(FlaskForm):
+    """Form to create a user."""
+    # stretch challenge
+    username = StringField('Username', 
+        validators=[
+            DataRequired(), 
+            Length(min=3, max=80, message="Your message needs to be betweeen 3 and 80 chars")
+        ])
+    favorite_books = QuerySelectMultipleField('Favorite Books', query_factory=lambda: Book.query)
+    submit = SubmitField('Submit')
+
+    def validate_username(form, field):
+        if not re.match(r'^[A-Za-z0-9\s]+$', field.data):
+            raise ValidationError('Username can only contain letters, numbers, and spaces')

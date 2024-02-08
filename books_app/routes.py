@@ -3,7 +3,7 @@ import os
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from datetime import date, datetime
 from books_app.models import Book, Author, Genre, User
-from books_app.forms import BookForm, AuthorForm, GenreForm
+from books_app.forms import BookForm, AuthorForm, GenreForm, UserForm
 
 # Import app and db from events_app package so that we can run app
 from books_app.extensions import app, db
@@ -80,13 +80,23 @@ def create_genre():
     # TODO: Send the form object to the template, and use it to render the form
     # fields
         flash('New genre was created successfully.')
-        return redirect(url_for('main.genre_detail', genre_id=new_genre.id))
     return render_template('create_genre.html', form=form)
 
 @main.route('/create_user', methods=['GET', 'POST'])
 def create_user():
     # STRETCH CHALLENGE: Fill out the Create User route
-    return "Not Yet Implemented"
+    form = UserForm()
+
+    if form.validate_on_submit():
+        new_user = User(
+            username=form.username.data,
+            favorite_books=form.favorite_books.data
+        )
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash('New user was created successfully.')
+    return render_template('create_user.html', form=form)
 
 @main.route('/book/<book_id>', methods=['GET', 'POST'])
 def book_detail(book_id):

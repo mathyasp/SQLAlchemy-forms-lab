@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>User creation form.</p>
+
+<!-- TODO: Add a <form> element here and use the form variable to show the labels & fields -->
+<form method="post" action="{{ url_for('main.create_user') }}">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Enter a username</legend>
+        
+        {{ form.username.label }} 
+        {{ form.username }}
+        <ul>
+        {% for error in form.username.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+        
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+{% endblock %}
