@@ -96,7 +96,16 @@ def book_detail(book_id):
     # TODO: If the form was submitted and is valid, update the fields in the 
     # Book object and save to the database, then flash a success message to the 
     # user and redirect to the book detail page
+    if form.validate_on_submit():
+        book.title = form.title.data
+        book.publish_date = form.publish_date.data
+        book.author = form.author.data
+        book.audience = form.audience.data
+        book.genres = form.genres.data
+        db.session.commit()
 
+        flash('Book details were updated successfully.')
+        return redirect(url_for('main.book_detail', book_id=book.id))
     return render_template('book_detail.html', book=book, form=form)
 
 @main.route('/profile/<username>')
