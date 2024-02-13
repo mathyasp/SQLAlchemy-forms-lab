@@ -61,7 +61,6 @@ def create_author():
     # TODO: Send the form object to the template, and use it to render the form
     # fields
         flash('New book was created successfully.')
-        return redirect(url_for('main.author_detail', author_id=new_author.id))
     return render_template('create_author.html', form=form)
 
 @main.route('/create_genre', methods=['GET', 'POST'])
@@ -125,4 +124,4 @@ def profile(username):
     user = User.query.filter_by(username=username).first()
     # STRETCH CHALLENGE: Add ability to modify a user's username or favorite 
     # books
-    return render_template('profile.html', username=username)
+    return render_template('profile.html', user=user)

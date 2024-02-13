@@ -24,7 +24,7 @@
     <strong>Genres</strong>: 
     
     {% for genre in book.genres %}
-    {{ genre.name }},
+    {{ genre.name }}
     {% endfor %}
 </p>
 
@@ -35,19 +35,28 @@
 
         {{ form.title.label }}
         {{ form.title }}
-        
+        <br>
+        <br>
         {{ form.publish_date.label }}
         {{ form.publish_date(placeholder="YYYY-mm-dd") }}
-        
+        <br>
+        <br>
         {{ form.author.label }}
         {{ form.author }}
-        
+        <br>
+        <br>
         {{ form.audience.label }}
         {{ form.audience }}
-        
+        <br>
+        <br>
         {{ form.genres.label }}
-        {{ form.genres }}
-            
+        <select name="{{ form.genres.name }}" id="{{ form.genres.id }}">
+            {% for genre in form.genres %}
+                <option value="{{ genre }}">{{ genre }}</option>
+            {% endfor %}
+        </select>
+        <br>  
+        <br>  
         {{ form.submit }}
     </fieldset>
 </form>
