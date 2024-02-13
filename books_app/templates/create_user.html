@@ -17,7 +17,10 @@
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>
-        
+
+        {{ form.favorite_books.label }}
+        {{ form.favorite_books }}
+
         {{ form.submit }}
     </fieldset>
 </form>

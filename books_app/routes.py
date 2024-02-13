@@ -122,7 +122,7 @@ def book_detail(book_id):
 def profile(username):
     # TODO: Make a query for the user with the given username, and send to the
     # template
-
+    user = User.query.filter_by(username=username).first()
     # STRETCH CHALLENGE: Add ability to modify a user's username or favorite 
     # books
     return render_template('profile.html', username=username)

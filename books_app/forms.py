@@ -52,7 +52,7 @@ class AuthorForm(FlaskForm):
             raise ValidationError('Biography can only contain letters, numbers, spaces, and punctuation')
 
     def validate_birth_date(form, field):
-        if not re.match(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}$', field.data):
+        if not re.match(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}$', str(field.data)):
             raise ValidationError('Birth date must be in the format YYYY-MM-DD')
 
     def validate_country(form, field):
